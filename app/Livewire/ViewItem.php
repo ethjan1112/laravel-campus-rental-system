@@ -3,7 +3,9 @@
 namespace App\Livewire;
 
 use App\Models\Item;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\View\View;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -51,9 +53,9 @@ class ViewItem extends Component
 
     public function updateItem()
     {
-        abort_unless(auth()->check(), 403);
+        abort_unless(Auth::check(), 403);
 
-        if ($this->item->user_id !== auth()->id()) {
+        if ($this->item->user_id !== Auth::id()) {
             abort(403, 'Unauthorized action.');
         }
 
@@ -82,11 +84,11 @@ class ViewItem extends Component
         $this->isEditing = false;
     }
 
-    public function render()
+    public function render(): mixed
     {
-        abort_unless(auth()->check(), 403);
+        abort_unless(Auth::check(), 403);
 
-        $isOwner = $this->item->user_id === auth()->id();
+        $isOwner = $this->item->user_id === Auth::id();
         $activeRental = $this->item->rentals->firstWhere('status', 'active');
 
         return view('livewire.view-item', [

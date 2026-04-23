@@ -198,7 +198,7 @@
 
                                 <div class="flex items-end justify-between">
                                     <div>
-                                        <div class="text-base font-bold text-[#2850d8]">${{ number_format($item->price, 2) }}</div>
+                                        <div class="text-base font-bold text-[#2850d8]">₱{{ number_format($item->price, 2) }}</div>
                                         <div class="text-[11px] text-slate-400">per day</div>
                                     </div>
                                     <div class="text-right text-[11px] text-slate-400">
